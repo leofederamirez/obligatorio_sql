@@ -7,14 +7,20 @@
   </head>
   <body>
     <h1>Nuevo Usuario</h1>
-    <label for="nombre">Nombre</label>
-    <input type="text" placeholder="nombre" />
-    <label for="apellido">Apellido</label>
-    <input type="text" placeholder="apellido" />
-
-    <input type="submit" value="Enviar" />
-    <input type="button" value="Mejor este boton" />
-
+    <label for="txtNombre">Nombre:</label>
+    <input type="text" id="txtNombre" placeholder="Ingrese Nombre" />
+    <br />
+    <br />
+    <label for="txtApellido">Apellido:</label>
+    <input type="text" id="txtApellido" placeholder="Ingrese Apellido" />
+    <br />
+    <br />
+    <label for="txtPass">Contraseña:</label>
+    <input type="password" id="txtPass" placeholder="Ingrese Contraseña" />
+    <br />
+    <br />
+    <input type="button" id="btnRegistrar" value="Registrarse" />
+    <p id="pMensaje"></p>
     <script src="js_backend.js"></script>
   </body>
 </html>
