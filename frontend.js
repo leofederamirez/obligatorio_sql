@@ -7,3 +7,19 @@ function registrarUsusrio() {
 
     console.log(nombre, apellido, password)
 }
+const resultsList = document.getElementById('results')
+
+
+function api() {
+    
+    fetch('/consulta')
+        .then(res => res.json())
+        .then(data =>{
+            console.log(data)
+    
+        })
+        .catch(err => {
+            console.log(err)
+        })
+}
+    

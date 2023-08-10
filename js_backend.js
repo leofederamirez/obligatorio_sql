@@ -1,14 +1,7 @@
 const http = require('http');
 const fs = require('fs')
-const mysql = require('mysql2');
-require('dotenv').config()
+const connection = require('./conectiondb')
 
-const connection = mysql.createConnection({
-    host: process.env.host,
-    user: process.env.user,
-    password: process.env.password,
-    database: process.env.database
-});
 
 
 const server = http.createServer((req, res) => {
@@ -23,27 +16,21 @@ const server = http.createServer((req, res) => {
         }
       });
     } 
-    else if (req.url === '/holamundo'){
+    else if (req.url === '/select'){
         
         // simple query
-        connection.query('SELECT * FROM usuarios;',
-            function(err, rows) {
-                const usuarios = rows.map(row => `<li>${row.nombre} - ${row.edad}</li>`);
-                const content = 
-                `<html>
-                    <head><title>Usuarios</title></head>
-                    <body>
-                    <h1>Lista de Usuarios</h1>
-                    <ul>${usuarios}</ul>
-                    </body>
-                </html>`;
-        res.writeHead(200, { 'Content-Type': 'text/html' });
-        res.end(content);
-        connection.end()
-        
+        connection.query('SELECT * FROM usuarios;',(err, rows) => {
+              if(err){
+                res.end('Error en el servidor')
+              }
+              else {
+                res.writeHead(200, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify(rows))
+              }
         });
         
     }
+
     else {
       res.writeHead(404, { 'Content-Type': 'text/plain' });
       res.end('Página no encontrada');
